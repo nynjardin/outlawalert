@@ -1,5 +1,5 @@
 # outlawalert
-Detect if player thief a car or if someone use a gun somewhere.
+Detect if player thief a car or if someone use a firegun somewhere.
 
 # Todo #
 
