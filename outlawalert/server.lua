@@ -25,3 +25,13 @@ RegisterServerEvent('gunshotInProgressS1')
 AddEventHandler('gunshotInProgressS1', function(street1, sex)
 	TriggerClientEvent("chatMessage", -1, '', { 0, 0, 0 }, "^1Gunshot by a ^0"..sex.." ^1at ^0"..street1)
 end)
+
+RegisterServerEvent('thiefInProgressPos')
+AddEventHandler('thiefInProgressPos', function(tx, ty, tz)
+	TriggerClientEvent('thiefPlace', -1, tx, ty, tz)
+end)
+
+RegisterServerEvent('gunshotInProgressPos')
+AddEventHandler('gunshotInProgressPos', function(gx, gy, gz)
+	TriggerClientEvent('gunshotPlace', -1, gx, gy, gz)
+end)
