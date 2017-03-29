@@ -5,6 +5,7 @@ Detect if player thief a car or if someone use a firegun somewhere.
 
 * ~~Blip on thief~~
 * ~~Blip on shoot~~
+* Outlaw status: a way to know if a player is outlaw or not by aim it
 
 
 # Bugs #
