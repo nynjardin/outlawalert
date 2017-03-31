@@ -1,6 +1,6 @@
 --Config
-local timer = 1 --in minutes - Set the time during the player is wanted
-local showOutlaw = true --Set if show outlaw player when aim it
+local timer = 1 --in minutes - Set the time during the player is outlaw
+local showOutlaw = true --Set if show outlaw act on map
 local gunshotAlert = true --Set if show alert when player use gun
 local carJackingAlert = true --Set if show when player do carjacking
 local meleeAlert = true --Set if show when player fight in melee
