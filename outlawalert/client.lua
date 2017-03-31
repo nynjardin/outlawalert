@@ -10,7 +10,7 @@ local blipJackingTime = 10 -- in second
 --End config
 
 local origin = false --Don't touche it
-local timing = timer * 60000
+local timing = timer * 60000 --Don't touche it
 
 RegisterNetEvent('outlawNotify')
 AddEventHandler('outlawNotify', function(alert)
@@ -40,7 +40,7 @@ RegisterNetEvent('thiefPlace')
 AddEventHandler('thiefPlace', function(tx, ty, tz)
     if not origin then
         if carJackingAlert then
-            transT = 250
+            local transT = 250
             local thiefBlip = AddBlipForCoord(tx, ty, tz)
             SetBlipSprite(thiefBlip,  10)
             SetBlipColour(thiefBlip,  1)
@@ -50,9 +50,11 @@ AddEventHandler('thiefPlace', function(tx, ty, tz)
                 Wait(blipJackingTime * 4)
                 transT = transT - 1
                 SetBlipAlpha(thiefBlip,  transT)
+                if transT == 0 then
+                    SetBlipSprite(thiefBlip,  2)
+                    return end
             end
-            if transT == 0 then
-                return end
+            
         end
     end
 end)
@@ -61,19 +63,21 @@ RegisterNetEvent('gunshotPlace')
 AddEventHandler('gunshotPlace', function(gx, gy, gz)
     if not origin then
         if gunshotAlert then
-            transG = 250
-            local thiefBlip = AddBlipForCoord(gx, gy, gz)
-            SetBlipSprite(thiefBlip,  1)
-            SetBlipColour(thiefBlip,  1)
-            SetBlipAlpha(thiefBlip,  transG)
-            SetBlipAsShortRange(thiefBlip,  1)
+            local transG = 250
+            local gunshotBlip = AddBlipForCoord(gx, gy, gz)
+            SetBlipSprite(gunshotBlip,  1)
+            SetBlipColour(gunshotBlip,  1)
+            SetBlipAlpha(gunshotBlip,  transG)
+            SetBlipAsShortRange(gunshotBlip,  1)
             while transG ~= 0 do
                 Wait(blipGunTime * 4)
                 transG = transG - 1
-                SetBlipAlpha(thiefBlip,  transG)
+                SetBlipAlpha(gunshotBlip,  transG)
+                if transG == 0 then
+                    SetBlipSprite(gunshotBlip,  2)
+                    return end
             end
-            if transG == 0 then
-                return end
+           
         end
     end
 end)
@@ -82,19 +86,21 @@ RegisterNetEvent('meleePlace')
 AddEventHandler('meleePlace', function(mx, my, mz)
     if not origin then
         if meleeAlert then
-            transM = 250
-            local thiefBlip = AddBlipForCoord(mx, my, mz)
-            SetBlipSprite(thiefBlip,  270)
-            SetBlipColour(thiefBlip,  17)
-            SetBlipAlpha(thiefBlip,  transG)
-            SetBlipAsShortRange(thiefBlip,  1)
+            local transM = 250
+            local meleeBlip = AddBlipForCoord(mx, my, mz)
+            SetBlipSprite(meleeBlip,  270)
+            SetBlipColour(meleeBlip,  17)
+            SetBlipAlpha(meleeBlip,  transG)
+            SetBlipAsShortRange(meleeBlip,  1)
             while transM ~= 0 do
                 Wait(blipMeleeTime * 4)
                 transM = transM - 1
-                SetBlipAlpha(thiefBlip,  transM)
+                SetBlipAlpha(meleeBlip,  transM)
+                if transM == 0 then
+                    SetBlipSprite(meleeBlip,  2)
+                    return end
             end
-            if transM == 0 then
-                return end
+            
         end
     end
 end)
