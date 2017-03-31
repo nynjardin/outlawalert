@@ -13,4 +13,4 @@ Detect if player thief a car or if someone use a firegun somewhere.
 # Bugs #
 
 * The game take time to detect that a player actually try to thief a car without ped inside, don't know why...
-* Sometime, there is a loop with blip
+* ~~Sometime, there is a loop with blip~~ look fixed
