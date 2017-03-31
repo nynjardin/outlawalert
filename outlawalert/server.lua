@@ -1,29 +1,40 @@
 RegisterServerEvent('thiefInProgress')
 AddEventHandler('thiefInProgress', function(street1, street2, veh, sex)
 	if veh == "NULL" then
-		TriggerClientEvent("chatMessage", -1, '', { 0, 0, 0 }, "^1Thief of a vehicle by a ^0"..sex.." ^1between ^0"..street1.."^1 and ^0"..street2)
+		TriggerClientEvent("outlawNotify", -1, "~r~Thief of a vehicle by a ~w~"..sex.." ~r~between ~w~"..street1.."~r~ and ~w~"..street2)
 	else
-		TriggerClientEvent("chatMessage", -1, '', { 0, 0, 0 }, "^1Thief of a ^0"..veh.." ^1by a ^0"..sex.." ^1between ^0"..street1.."^1 and ^0"..street2)
+		TriggerClientEvent("outlawNotify", -1, "~r~Thief of a ~w~"..veh.." ~r~by a ~w~"..sex.." ~r~between ~w~"..street1.."~r~ and ~w~"..street2)
 	end
 end)
 
 RegisterServerEvent('thiefInProgressS1')
 AddEventHandler('thiefInProgressS1', function(street1, veh, sex)
 	if veh == "NULL" then
-		TriggerClientEvent("chatMessage", -1, '', { 0, 0, 0 }, "^1Thief of a vehicle by a ^0"..sex.." ^1at ^0"..street1)
+		TriggerClientEvent("outlawNotify", -1, "~r~Thief of a vehicle by a ~w~"..sex.." ~r~at ~w~"..street1)
 	else
-		TriggerClientEvent("chatMessage", -1, '', { 0, 0, 0 }, "^1Thief of a ^0"..veh.." ^1by a ^0"..sex.." ^1at ^0"..street1)
+		TriggerClientEvent("outlawNotify", -1, "~r~Thief of a ~w~"..veh.." ~r~by a ~w~"..sex.." ~r~at ~w~"..street1)
 	end
 end)
 
+RegisterServerEvent('meleeInProgress')
+AddEventHandler('meleeInProgress', function(street1, street2, sex)
+	TriggerClientEvent("outlawNotify", -1, "~r~Fight initiated by a ~w~"..sex.." ~r~between ~w~"..street1.."~r~ and ~w~"..street2)
+end)
+
+RegisterServerEvent('meleeInProgressS1')
+AddEventHandler('meleeInProgressS1', function(street1, sex)
+	TriggerClientEvent("outlawNotify", -1, "~r~Fight initiated by a ~w~"..sex.." ~r~at ~w~"..street1)
+end)
+
+
 RegisterServerEvent('gunshotInProgress')
 AddEventHandler('gunshotInProgress', function(street1, street2, sex)
-	TriggerClientEvent("chatMessage", -1, '', { 0, 0, 0 }, "^1Gunshot by a ^0"..sex.." ^1between ^0"..street1.."^1 and ^0"..street2)
+	TriggerClientEvent("outlawNotify", -1, "~r~Gunshot by a ~w~"..sex.." ~r~between ~w~"..street1.."~r~ and ~w~"..street2)
 end)
 
 RegisterServerEvent('gunshotInProgressS1')
 AddEventHandler('gunshotInProgressS1', function(street1, sex)
-	TriggerClientEvent("chatMessage", -1, '', { 0, 0, 0 }, "^1Gunshot by a ^0"..sex.." ^1at ^0"..street1)
+	TriggerClientEvent("outlawNotify", -1, "~r~Gunshot by a ~w~"..sex.." ~r~at ~w~"..street1)
 end)
 
 RegisterServerEvent('thiefInProgressPos')
@@ -34,4 +45,9 @@ end)
 RegisterServerEvent('gunshotInProgressPos')
 AddEventHandler('gunshotInProgressPos', function(gx, gy, gz)
 	TriggerClientEvent('gunshotPlace', -1, gx, gy, gz)
+end)
+
+RegisterServerEvent('meleeInProgressPos')
+AddEventHandler('meleeInProgressPos', function(mx, my, mz)
+	TriggerClientEvent('meleePlace', -1, mx, my, mz)
 end)
