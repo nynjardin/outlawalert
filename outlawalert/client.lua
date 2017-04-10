@@ -12,10 +12,19 @@ local blipJackingTime = 10 -- in second
 local origin = false --Don't touche it
 local timing = timer * 60000 --Don't touche it
 
+local PedModels = {
+        "s_m_y_cop_01",
+        's_m_m_snowcop_01',
+        's_m_y_hwaycop_01',
+        's_f_y_cop_01',
+    }
+
 RegisterNetEvent('outlawNotify')
 AddEventHandler('outlawNotify', function(alert)
-    if not origin then
-        Notify(alert)
+    for i = 0, #PedModels do
+        if not origin and IsPedModel(GetPlayerPed(-1),GetHashKey(PedModels[i])) then
+            Notify(alert)
+        end
     end
 end)
 
@@ -38,69 +47,75 @@ end)
 
 RegisterNetEvent('thiefPlace')
 AddEventHandler('thiefPlace', function(tx, ty, tz)
-    if not origin then
-        if carJackingAlert then
-            local transT = 250
-            local thiefBlip = AddBlipForCoord(tx, ty, tz)
-            SetBlipSprite(thiefBlip,  10)
-            SetBlipColour(thiefBlip,  1)
-            SetBlipAlpha(thiefBlip,  transT)
-            SetBlipAsShortRange(thiefBlip,  1)
-            while transT ~= 0 do
-                Wait(blipJackingTime * 4)
-                transT = transT - 1
+    for i = 0, #PedModels do
+        if not origin and IsPedModel(GetPlayerPed(-1),GetHashKey(PedModels[i])) then
+            if carJackingAlert then
+                local transT = 250
+                local thiefBlip = AddBlipForCoord(tx, ty, tz)
+                SetBlipSprite(thiefBlip,  10)
+                SetBlipColour(thiefBlip,  1)
                 SetBlipAlpha(thiefBlip,  transT)
-                if transT == 0 then
-                    SetBlipSprite(thiefBlip,  2)
-                    return end
+                SetBlipAsShortRange(thiefBlip,  1)
+                while transT ~= 0 do
+                    Wait(blipJackingTime * 4)
+                    transT = transT - 1
+                    SetBlipAlpha(thiefBlip,  transT)
+                    if transT == 0 then
+                        SetBlipSprite(thiefBlip,  2)
+                        return end
+                end
+                
             end
-            
         end
     end
 end)
 
 RegisterNetEvent('gunshotPlace')
 AddEventHandler('gunshotPlace', function(gx, gy, gz)
-    if not origin then
-        if gunshotAlert then
-            local transG = 250
-            local gunshotBlip = AddBlipForCoord(gx, gy, gz)
-            SetBlipSprite(gunshotBlip,  1)
-            SetBlipColour(gunshotBlip,  1)
-            SetBlipAlpha(gunshotBlip,  transG)
-            SetBlipAsShortRange(gunshotBlip,  1)
-            while transG ~= 0 do
-                Wait(blipGunTime * 4)
-                transG = transG - 1
+    for i = 0, #PedModels do
+        if not origin and IsPedModel(GetPlayerPed(-1),GetHashKey(PedModels[i])) then
+            if gunshotAlert then
+                local transG = 250
+                local gunshotBlip = AddBlipForCoord(gx, gy, gz)
+                SetBlipSprite(gunshotBlip,  1)
+                SetBlipColour(gunshotBlip,  1)
                 SetBlipAlpha(gunshotBlip,  transG)
-                if transG == 0 then
-                    SetBlipSprite(gunshotBlip,  2)
-                    return end
+                SetBlipAsShortRange(gunshotBlip,  1)
+                while transG ~= 0 do
+                    Wait(blipGunTime * 4)
+                    transG = transG - 1
+                    SetBlipAlpha(gunshotBlip,  transG)
+                    if transG == 0 then
+                        SetBlipSprite(gunshotBlip,  2)
+                        return end
+                end
+               
             end
-           
         end
     end
 end)
 
 RegisterNetEvent('meleePlace')
 AddEventHandler('meleePlace', function(mx, my, mz)
-    if not origin then
-        if meleeAlert then
-            local transM = 250
-            local meleeBlip = AddBlipForCoord(mx, my, mz)
-            SetBlipSprite(meleeBlip,  270)
-            SetBlipColour(meleeBlip,  17)
-            SetBlipAlpha(meleeBlip,  transG)
-            SetBlipAsShortRange(meleeBlip,  1)
-            while transM ~= 0 do
-                Wait(blipMeleeTime * 4)
-                transM = transM - 1
-                SetBlipAlpha(meleeBlip,  transM)
-                if transM == 0 then
-                    SetBlipSprite(meleeBlip,  2)
-                    return end
+   for i = 0, #PedModels do
+        if not origin and IsPedModel(GetPlayerPed(-1),GetHashKey(PedModels[i])) then
+            if meleeAlert then
+                local transM = 250
+                local meleeBlip = AddBlipForCoord(mx, my, mz)
+                SetBlipSprite(meleeBlip,  270)
+                SetBlipColour(meleeBlip,  17)
+                SetBlipAlpha(meleeBlip,  transG)
+                SetBlipAsShortRange(meleeBlip,  1)
+                while transM ~= 0 do
+                    Wait(blipMeleeTime * 4)
+                    transM = transM - 1
+                    SetBlipAlpha(meleeBlip,  transM)
+                    if transM == 0 then
+                        SetBlipSprite(meleeBlip,  2)
+                        return end
+                end
+                
             end
-            
         end
     end
 end)
@@ -125,7 +140,7 @@ Citizen.CreateThread( function()
         if showOutlaw then
             for i = 0, 31 do
                 if DecorGetInt(GetPlayerPed(i), "IsOutlaw") == 2 and GetPlayerPed(i) ~= GetPlayerPed(-1) then
-                    gamerTagId = Citizen.InvokeNative(0xBFEFE3321A3F5015, GetPlayerPed(i), "", false, false, "", 0 )
+                    gamerTagId = Citizen.InvokeNative(0xBFEFE3321A3F5015, GetPlayerPed(i), ".", false, false, "", 0 )
                     Citizen.InvokeNative(0xCF228E2AA03099C3, gamerTagId, 0) --Show a star
                     Citizen.InvokeNative(0x63BB75ABEDC1F6A0, gamerTagId, 7, true) --Active gamerTagId
                     Citizen.InvokeNative(0x613ED644950626AE, gamerTagId, 7, 1) --White star
