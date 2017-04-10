@@ -17,6 +17,17 @@ local PedModels = {
         's_m_m_snowcop_01',
         's_m_y_hwaycop_01',
         's_f_y_cop_01',
+        's_m_y_sheriff_01',
+        's_m_y_ranger_01',
+        's_m_m_ciasec_01',
+        's_m_m_armoured_01',
+        's_m_m_armoured_01',
+        's_f_y_sheriff_01',
+        's_f_y_ranger_01',
+        --'s_m_m_armoured_01',
+        --'s_m_m_armoured_02',
+        --'u_m_m_fibarchitect',
+        --'s_m_y_swat_01',
     }
 
 RegisterNetEvent('outlawNotify')
