@@ -29,7 +29,7 @@ local PedModels = {
         --'u_m_m_fibarchitect',
         --'s_m_y_swat_01',
     }
-
+GetPlayerName()
 RegisterNetEvent('outlawNotify')
 AddEventHandler('outlawNotify', function(alert)
     for i = 0, #PedModels do
