@@ -1,16 +1,5 @@
-# Outlawalert
-Detect if player thief a car or if someone use a firegun somewhere.
+# esx_outlawalert
 
-# Todo #
+script originally from here: https://forum.fivem.net/t/release-simple-outlaw-alert-11-04-2017/9383
 
-* ~~Blip on thief~~
-* ~~Blip on shoot~~
-* ~~Blip for melee~~
-* ~~Outlaw status: a way to know if a player is outlaw or not (By adding a start next the player name)~~
-* ~~The Outlaw don't see it was marked at outlaw (show nothing on map and see nothing in chat)~~
-
-
-# Bugs #
-
-* The game take time to detect that a player actually try to thief a car without ped inside, don't know why...
-* ~~Sometime, there is a loop with blip~~ look fixed
+made it esx compatibe. shows alert to cops when shooting, carjacking car or fighting.
