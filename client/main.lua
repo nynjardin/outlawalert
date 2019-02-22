@@ -88,7 +88,7 @@ AddEventHandler('esx_outlawalert:carJackInProgress', function(targetCoords)
 	if isPlayerWhitelisted then
 		if Config.CarJackingAlert then
 			local alpha = 250
-			local thiefBlip = AddBlipForRadius(targetCoords, Config.BlipJackingRadius)
+			local thiefBlip = AddBlipForRadius(targetCoords.x, targetCoords.y, targetCoords.z, Config.BlipJackingRadius)
 
 			SetBlipHighDetail(thiefBlip, true)
 			SetBlipColour(thiefBlip, 1)
@@ -114,7 +114,7 @@ RegisterNetEvent('esx_outlawalert:gunshotInProgress')
 AddEventHandler('esx_outlawalert:gunshotInProgress', function(targetCoords)
 	if isPlayerWhitelisted and Config.GunshotAlert then
 		local alpha = 250
-		local gunshotBlip = AddBlipForRadius(targetCoords, Config.BlipGunRadius)
+		local gunshotBlip = AddBlipForRadius(targetCoords.x, targetCoords.y, targetCoords.z, Config.BlipGunRadius)
 
 		SetBlipHighDetail(gunshotBlip, true)
 		SetBlipColour(gunshotBlip, 1)
@@ -138,7 +138,7 @@ RegisterNetEvent('esx_outlawalert:combatInProgress')
 AddEventHandler('esx_outlawalert:combatInProgress', function(targetCoords)
 	if isPlayerWhitelisted and Config.MeleeAlert then
 		local alpha = 250
-		local meleeBlip = AddBlipForRadius(targetCoords, Config.BlipMeleeRadius)
+		local meleeBlip = AddBlipForRadius(targetCoords.x, targetCoords.y, targetCoords.z, Config.BlipMeleeRadius)
 
 		SetBlipHighDetail(meleeBlip, true)
 		SetBlipColour(meleeBlip, 17)
@@ -192,7 +192,12 @@ Citizen.CreateThread(function()
 						vehicleLabel = GetLabelText(vehicleLabel)
 
 						DecorSetInt(playerPed, 'isOutlaw', 2)
-						TriggerServerEvent('esx_outlawalert:carJackInProgress', playerCoords, streetName, vehicleLabel, playerGender)
+
+						TriggerServerEvent('esx_outlawalert:carJackInProgress', {
+							x = ESX.Math.Round(playerCoords.x, 1),
+							y = ESX.Math.Round(playerCoords.y, 1),
+							z = ESX.Math.Round(playerCoords.z, 1)
+						}, streetName, vehicleLabel, playerGender)
 					end
 				end, plate)
 			end
@@ -203,7 +208,12 @@ Citizen.CreateThread(function()
 
 			if (isPlayerWhitelisted and Config.ShowCopsMisbehave) or not isPlayerWhitelisted then
 				DecorSetInt(playerPed, 'isOutlaw', 2)
-				TriggerServerEvent('esx_outlawalert:combatInProgress', playerCoords, streetName, playerGender)
+
+				TriggerServerEvent('esx_outlawalert:combatInProgress', {
+					x = ESX.Math.Round(playerCoords.x, 1),
+					y = ESX.Math.Round(playerCoords.y, 1),
+					z = ESX.Math.Round(playerCoords.z, 1)
+				}, streetName, playerGender)
 			end
 
 		-- TODO is the ped's weapon suppressed?
@@ -213,7 +223,12 @@ Citizen.CreateThread(function()
 
 			if (isPlayerWhitelisted and Config.ShowCopsMisbehave) or not isPlayerWhitelisted then
 				DecorSetInt(playerPed, 'isOutlaw', 2)
-				TriggerServerEvent('esx_outlawalert:gunshotInProgress', playerCoords, streetName, playerGender)
+
+				TriggerServerEvent('esx_outlawalert:gunshotInProgress', {
+					x = ESX.Math.Round(playerCoords.x, 1),
+					y = ESX.Math.Round(playerCoords.y, 1),
+					z = ESX.Math.Round(playerCoords.z, 1)
+				}, streetName, playerGender)
 			end
 
 		end
