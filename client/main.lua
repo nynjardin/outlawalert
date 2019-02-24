@@ -177,7 +177,7 @@ Citizen.CreateThread(function()
 		local playerCoords = GetEntityCoords(playerPed)
 
 		-- is jackin'
-		if IsPedTryingToEnterALockedVehicle(playerPed) or IsPedJacking(playerPed) then
+		if (IsPedTryingToEnterALockedVehicle(playerPed) or IsPedJacking(playerPed)) and Config.CarJackingAlert then
 
 			Citizen.Wait(3000)
 			local vehicle = GetVehiclePedIsIn(playerPed, true)
@@ -202,7 +202,7 @@ Citizen.CreateThread(function()
 				end, plate)
 			end
 
-		elseif IsPedInMeleeCombat(playerPed) then
+		elseif IsPedInMeleeCombat(playerPed) and Config.MeleeAlert then
 
 			Citizen.Wait(3000)
 
@@ -217,7 +217,7 @@ Citizen.CreateThread(function()
 			end
 
 		-- TODO is the ped's weapon suppressed?
-		elseif IsPedShooting(playerPed) then
+		elseif IsPedShooting(playerPed) and Config.GunshotAlert then
 
 			Citizen.Wait(3000)
 
