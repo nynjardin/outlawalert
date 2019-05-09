@@ -105,7 +105,7 @@ AddEventHandler('esx_outlawalert:carJackInProgress', function(targetCoords)
 					return
 				end
 			end
-			
+
 		end
 	end
 end)
@@ -216,8 +216,7 @@ Citizen.CreateThread(function()
 				}, streetName, playerGender)
 			end
 
-		-- TODO is the ped's weapon suppressed?
-		elseif IsPedShooting(playerPed) and Config.GunshotAlert then
+		elseif IsPedShooting(playerPed) and not IsPedCurrentWeaponSilenced(playerPed) and Config.GunshotAlert then
 
 			Citizen.Wait(3000)
 
