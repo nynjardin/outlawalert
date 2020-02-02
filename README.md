@@ -1,16 +1,12 @@
-# Outlawalert
-Detect if player thief a car or if someone use a firegun somewhere.
+# esx_outlawalert
 
-# Todo #
+Outlaw Alert is an resource that detects if the player either steals an vehicle, fires a weapon or if the player is fighting another player / ped.
 
-* ~~Blip on thief~~
-* ~~Blip on shoot~~
-* ~~Blip for melee~~
-* ~~Outlaw status: a way to know if a player is outlaw or not (By adding a start next the player name)~~
-* ~~The Outlaw don't see it was marked at outlaw (show nothing on map and see nothing in chat)~~
+Fork of the original resource which has the following changes: made esx compatible, it shows alert to cops when shooting, carjacking or fighting.
 
+## Credits
 
-# Bugs #
-
-* The game take time to detect that a player actually try to thief a car without ped inside, don't know why...
-* ~~Sometime, there is a loop with blip~~ look fixed
+- nynjardin, original developer
+- JB, initial support for ESX
+- Jijamik, French translation
+- Hawaii_Beach, resource cleanup
